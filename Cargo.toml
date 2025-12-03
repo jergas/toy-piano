@@ -1,0 +1,23 @@
+[package]
+name = "toy-piano"
+version = "0.1.0"
+edition = "2021"
+authors = ["Jergas Apwith <spam@jerx.net>"]
+description = "A simple, low-latency, multiplatform piano application."
+
+[dependencies]
+# Audio
+cpal = "0.15"
+rustysynth = "1.0"
+
+# MIDI
+midir = "0.9"
+
+# GUI
+iced = { version = "0.12", features = ["canvas", "tokio"] }
+
+# Utilities
+rtrb = "0.3" # Ring buffer for audio thread communication
+anyhow = "1.0"
+log = "0.4"
+env_logger = "0.11"
