@@ -68,12 +68,34 @@ impl AudioEngine {
 
         stream.play().context("Failed to start audio stream")?;
 
-        // TEST: Play Middle C (MIDI 60) for verification
-        {
-            let mut synth = synthesizer.lock().unwrap();
-            synth.note_on(0, 60, 100); // Channel 0, Note 60, Velocity 100
-            info!("Test Note ON: Middle C");
-        }
+        // Startup Jingle: Playful melodic phrase with dynamics
+        let jingle_synth = synthesizer.clone();
+        std::thread::spawn(move || {
+            // Notes: A little "question-answer" motif
+            // G-A-B-D (up) -> C-B-A-G (resolve down) but only 7 notes total
+            // G4-B4-D5-G5 (leap up) -> F5-E5-D5 (step down to resolve)
+            let notes_and_velocities = [
+                (67, 70),   // G4 - soft start
+                (71, 80),   // B4 - building
+                (74, 90),   // D5 - peak approach
+                (79, 100),  // G5 - peak! (loudest)
+                (77, 85),   // F5 - start descent
+                (76, 75),   // E5 - softer
+                (74, 65),   // D5 - gentle landing
+            ];
+            let note_duration = std::time::Duration::from_millis(100);
+
+            for (note, velocity) in notes_and_velocities {
+                if let Ok(mut synth) = jingle_synth.lock() {
+                    synth.note_on(0, note, velocity);
+                }
+                std::thread::sleep(note_duration);
+                if let Ok(mut synth) = jingle_synth.lock() {
+                    synth.note_off(0, note);
+                }
+            }
+            info!("Startup jingle played!");
+        });
 
         Ok(AudioEngine {
             _stream: stream,
