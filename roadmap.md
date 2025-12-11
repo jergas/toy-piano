@@ -3,10 +3,10 @@
 ## Phase 1: Foundation & Planning
 - [x] **Architecture Blueprint**: Define technology stack and system design.
 - [x] **Environment Setup**: Install Rust toolchain and verify Git/GitHub access.
-- [ ] **Project Initialization**: Initialize Rust project structure and dependencies.
+- [x] **Project Initialization**: Initialize Rust project structure and dependencies.
 
 ## Phase 2: Core Audio & MIDI
-- [ ] **Audio Engine**: Implement low-latency audio output using `cpal` and `rustysynth`.
+- [x] **Audio Engine**: Implement low-latency audio output using `cpal` and `rustysynth`.
 - [ ] **MIDI Input**: Implement MIDI event handling using `midir`.
 
 ## Phase 3: User Interface
