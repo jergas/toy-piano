@@ -15,10 +15,22 @@ impl AudioEngine {
         info!("Initializing Audio Engine...");
 
         // 1. Load SoundFont
-        let sf2_path = "assets/SalamanderGrandPiano-V3+20200602.sf2";
-        info!("Loading SoundFont from: {}", sf2_path);
-        let mut sf2_file = File::open(sf2_path)
-            .with_context(|| format!("Failed to open SoundFont at {}", sf2_path))?;
+        let sf2_filename = "SalamanderGrandPiano-V3+20200602.sf2";
+        
+        let sf2_path = {
+             let std_path = std::path::Path::new("assets").join(sf2_filename);
+             if std_path.exists() {
+                 std_path
+             } else if let Ok(exe_path) = std::env::current_exe() {
+                 exe_path.parent().unwrap().join("assets").join(sf2_filename)
+             } else {
+                 std_path // Fallback
+             }
+        };
+
+        info!("Loading SoundFont from: {:?}", sf2_path);
+        let mut sf2_file = File::open(&sf2_path)
+            .with_context(|| format!("Failed to open SoundFont at {:?}", sf2_path))?;
         let sound_font = Arc::new(SoundFont::new(&mut sf2_file).context("Failed to parse SoundFont")?);
 
         // 2. Setup CPAL

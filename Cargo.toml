@@ -21,3 +21,4 @@ rtrb = "0.3" # Ring buffer for audio thread communication
 anyhow = "1.0"
 log = "0.4"
 env_logger = "0.11"
+image = { version = "0.24", default-features = false, features = ["png"] }

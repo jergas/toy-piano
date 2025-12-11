@@ -2,3 +2,8 @@
 target/
 **/*.rs.bk
 *.sf2
+
+# Build artifacts
+*.zip
+*.app/
+error.log
