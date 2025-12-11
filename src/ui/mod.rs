@@ -35,15 +35,32 @@ impl Application for ToyPianoApp {
             Err(_) => vec![]
         };
 
+        let (selected_port, status_message) = if let Some(first_port) = ports.first() {
+            // We initiate a connection command in the init (handled by update via a new 'Init' message or just simulate selection)
+            // But we can't emit a message from 'new' easily without 'Task' (Command).
+            // A simple way is to set selected_port here, but the ACTUAL connection logic is in 'update'.
+            // To trigger the connection on startup, we return a Command equivalent to PortSelected.
+            (Some(first_port.clone()), format!("Connecting to {}...", first_port))
+        } else {
+            (None, "Ready. Select a MIDI Input.".to_string())
+        };
+
         let app = ToyPianoApp {
             audio_engine,
             midi_connection: None,
             available_ports: ports,
-            selected_port: None,
-            status_message: "Ready. Select a MIDI Input.".to_string(),
+            selected_port, // Pre-select in UI
+            status_message, 
         };
 
-        (app, Command::none())
+        // If we have a port, trigger the connection logic immediately
+        let command = if let Some(port) = app.selected_port.clone() {
+            Command::perform(async move { port }, Message::PortSelected)
+        } else {
+            Command::none()
+        };
+
+        (app, command)
     }
 
     fn title(&self) -> String {
