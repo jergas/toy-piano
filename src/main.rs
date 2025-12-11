@@ -12,10 +12,13 @@ fn main() -> Result<()> {
     info!("Toy Piano starting up...");
 
     // Initialize Audio Engine
-    // We keep the engine alive by binding it to a variable
-    let _audio_engine = audio::AudioEngine::init()?;
+    let audio_engine = audio::AudioEngine::init()?;
     
-    info!("Audio Engine initialized. Playing test note...");
+    // Initialize MIDI Engine
+    // We pass the synthesizer (shared state) to the MIDI engine
+    let _midi_engine = midi::MidiEngine::init(audio_engine.get_synthesizer())?;
+
+    info!("Audio and MIDI initialized. Ready to play!");
     
     // Keep the main thread alive so the audio stream continues
     // Later this will be replaced by the UI event loop

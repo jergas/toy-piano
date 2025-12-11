@@ -7,7 +7,7 @@
 
 ## Phase 2: Core Audio & MIDI
 - [x] **Audio Engine**: Implement low-latency audio output using `cpal` and `rustysynth`.
-- [ ] **MIDI Input**: Implement MIDI event handling using `midir`.
+- [x] **MIDI Input**: Implement MIDI event handling using `midir`.
 
 ## Phase 3: User Interface
 - [ ] **UI Implementation**: Build the GUI using `iced` for device selection and settings.

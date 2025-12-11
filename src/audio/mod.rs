@@ -68,6 +68,10 @@ impl AudioEngine {
             synthesizer,
         })
     }
+
+    pub fn get_synthesizer(&self) -> Arc<Mutex<Synthesizer>> {
+        self.synthesizer.clone()
+    }
 }
 
 fn render_audio(output: &mut [f32], channels: usize, synthesizer: &Arc<Mutex<Synthesizer>>) {
