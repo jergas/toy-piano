@@ -44,6 +44,14 @@ cat > "$CONTENTS_DIR/Info.plist" <<EOF
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
     <string>0.1.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>NSHumanReadableCopyright</key>
+    <string>simple Toy Piano driven by a MIDI controller
+
+github.com/jergas/toy-piano</string>
+    <key>CFBundleGetInfoString</key>
+    <string>Toy Piano 0.1.0</string>
 </dict>
 </plist>
 EOF

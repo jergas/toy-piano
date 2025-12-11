@@ -16,6 +16,7 @@ pub struct ToyPianoApp {
 pub enum Message {
     PortSelected(String),
     Rescan,
+    OpenGitHub,
 }
 
 impl Application for ToyPianoApp {
@@ -116,6 +117,9 @@ impl Application for ToyPianoApp {
                      }
                 }
             }
+            Message::OpenGitHub => {
+                let _ = open::that("https://github.com/jergas/toy-piano");
+            }
         }
         Command::none()
     }
@@ -152,7 +156,18 @@ impl Application for ToyPianoApp {
                 text("MIDI Input:").size(20).style(Color::from_rgb(0.8, 1.0, 0.8)),
                 port_picker,
                 rescan_button
-            ].spacing(20).align_items(iced::Alignment::Center)
+            ].spacing(20).align_items(iced::Alignment::Center),
+            vertical_space().height(60),
+            // About section
+            text("plug in your MIDI keyboard, rescan, and select it,")
+                .size(14)
+                .style(Color::from_rgb(0.6, 0.8, 0.6)),
+            text("or restart the app with your controller plugged in")
+                .size(14)
+                .style(Color::from_rgb(0.6, 0.8, 0.6)),
+            button("github.com/jergas/toy-piano")
+                .style(iced::theme::Button::Custom(Box::new(LinkButton)))
+                .on_press(Message::OpenGitHub),
         ]
         .spacing(10)
         .padding(40)
@@ -204,6 +219,28 @@ impl button::StyleSheet for ForestGreenButton {
         button::Appearance {
             background: Some(iced::Background::Color(Color::from_rgb8(0, 100, 0))), // Darker Green
             ..active
+        }
+    }
+}
+
+struct LinkButton;
+
+impl button::StyleSheet for LinkButton {
+    type Style = Theme;
+
+    fn active(&self, _style: &Self::Style) -> button::Appearance {
+        button::Appearance {
+            background: None,
+            text_color: Color::from_rgb(0.5, 0.7, 0.5),
+            ..Default::default()
+        }
+    }
+
+    fn hovered(&self, _style: &Self::Style) -> button::Appearance {
+        button::Appearance {
+            background: None,
+            text_color: Color::from_rgb(0.7, 1.0, 0.7), // Brighter on hover
+            ..Default::default()
         }
     }
 }
