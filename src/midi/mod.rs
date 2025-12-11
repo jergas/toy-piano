@@ -41,7 +41,7 @@ impl MidiEngine {
     }
 }
 
-fn handle_midi_message(message: &[u8], synthesizer: &Arc<Mutex<Synthesizer>>) {
+pub fn handle_midi_message(message: &[u8], synthesizer: &Arc<Mutex<Synthesizer>>) {
     if message.len() < 3 {
         return;
     }

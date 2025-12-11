@@ -10,7 +10,7 @@
 - [x] **MIDI Input**: Implement MIDI event handling using `midir`.
 
 ## Phase 3: User Interface
-- [ ] **UI Implementation**: Build the GUI using `iced` for device selection and settings.
+- [x] **UI Implementation**: Build the GUI using `iced` for device selection and settings.
 
 ## Phase 4: Testing & Distribution
 - [ ] **Legacy macOS Support**: Verify functionality on macOS 10 (Intel).

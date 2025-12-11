@@ -3,26 +3,23 @@ pub mod midi;
 pub mod ui;
 
 use anyhow::Result;
+use iced::{Application, Settings};
 use log::info;
-use std::thread;
-use std::time::Duration;
+use std::sync::Arc;
+use ui::ToyPianoApp;
 
 fn main() -> Result<()> {
     env_logger::init();
     info!("Toy Piano starting up...");
 
-    // Initialize Audio Engine
-    let audio_engine = audio::AudioEngine::init()?;
-    
-    // Initialize MIDI Engine
-    // We pass the synthesizer (shared state) to the MIDI engine
-    let _midi_engine = midi::MidiEngine::init(audio_engine.get_synthesizer())?;
+    // Initialize Audio Engine first
+    // We wrap it in Arc to share it with the UI (and keep it alive)
+    let audio_engine = Arc::new(audio::AudioEngine::init()?);
+    info!("Audio Engine initialized.");
 
-    info!("Audio and MIDI initialized. Ready to play!");
-    
-    // Keep the main thread alive so the audio stream continues
-    // Later this will be replaced by the UI event loop
-    loop {
-        thread::sleep(Duration::from_secs(1));
-    }
+    // Launch GUI
+    // The UI handles Midi connection dynamically
+    ToyPianoApp::run(Settings::with_flags(audio_engine))?;
+
+    Ok(())
 }
