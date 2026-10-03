@@ -1,3 +1,8 @@
+// Toy Piano -- a simple, low-latency, multiplatform piano application.
+// Copyright (C) 2026 Jergas Apwith
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
 use iced::widget::{button, column, container, pick_list, row, text, vertical_space};
 use iced::{executor, Application, Color, Command, Element, Length, Theme};
 use midir::{MidiInput, MidiInputConnection};

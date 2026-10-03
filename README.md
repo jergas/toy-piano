@@ -18,4 +18,12 @@ cargo build --release
 
 ## License
 
-Open source. See LICENSE for details.
+Toy Piano is free software, licensed under the
+[GNU General Public License, version 3 or later](LICENSE)
+(`GPL-3.0-or-later`). You may use, study, modify and redistribute it; any
+derivative you distribute must stay under the same licence.
+
+Copyright (C) 2026 Jergas Apwith.
+
+Bundled SoundFonts carry their own terms — see `assets/` for the licence that
+came with each one.

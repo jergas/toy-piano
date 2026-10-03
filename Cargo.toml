@@ -4,6 +4,11 @@ version = "0.1.0"
 edition = "2021"
 authors = ["Jergas Apwith <spam@jerx.net>"]
 description = "A simple, low-latency, multiplatform piano application."
+license = "GPL-3.0-or-later"
+repository = "https://github.com/jergas/toy-piano"
+readme = "README.md"
+keywords = ["midi", "piano", "synthesizer", "soundfont"]
+categories = ["multimedia::audio", "multimedia::music"]
 
 [dependencies]
 # Audio

@@ -1,3 +1,8 @@
+// Toy Piano -- a simple, low-latency, multiplatform piano application.
+// Copyright (C) 2026 Jergas Apwith
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
 pub mod audio;
 pub mod midi;
 pub mod ui;

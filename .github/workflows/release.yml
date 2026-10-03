@@ -26,6 +26,10 @@ jobs:
             target: x86_64-apple-darwin
             artifact_name: toy-piano-macos
             binary_name: toy-piano
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            artifact_name: toy-piano-macos-arm64
+            binary_name: toy-piano
 
     runs-on: ${{ matrix.os }}
 
